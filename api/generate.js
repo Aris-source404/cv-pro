@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
           headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
           body: JSON.stringify({
             contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { maxOutputTokens: 1500 }
+            generationConfig: Object.assign({ maxOutputTokens: 4000 }, req.body.json === true ? { responseMimeType: 'application/json' } : {})
           })
         }
       );
